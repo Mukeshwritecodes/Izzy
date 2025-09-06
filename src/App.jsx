@@ -1,23 +1,44 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import Genre from './pages/Genre'
-import Book from './pages/Book'
-import Orders from './pages/Orders'
-import Profile from './pages/Profile'
+// App.jsx
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+// Layout Components
+import Navbar from "./components/layout/Navbar";
+import Sidebar from "./components/layout/Sidebar";
+import Footer from "./components/layout/Footer";
+
+// Pages (use your actual filenames)
+import Home from "./pages/Home";
+import Catalog from "./pages/Catalog";
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Contact from "./pages/Contact";
+import Blog from "./Pages/Blog";
+import UserProfile from "./pages/UserProfile";
+import UserOrder from "./pages/UserOrder";
+
+export default function App() {
   return (
-    <Router>
-      {/* Sidebar or Navbar can go here if global */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/genre" element={<Genre />} />
-        <Route path="/book" element={<Book />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </Router>
-  )
-}
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <Navbar />
+      <Sidebar />
 
-export default App
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/orders" element={<UserOrder />} />
+        </Routes>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
