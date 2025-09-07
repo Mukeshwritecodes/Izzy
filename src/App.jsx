@@ -1,13 +1,11 @@
-// App.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Layout Components
 import Navbar from "./components/layout/Navbar";
-// import Sidebar from "./components/layout/Sidebar";
-// import Footer from "./components/layout/Footer";
+import Footer from "./components/layout/Footer";
 
-// Pages (use your actual filenames)
+// Pages (commented for now)
 // import Home from "./pages/Home";
 // import Catalog from "./pages/Catalog";
 // import Product from "./pages/Product";
@@ -38,7 +36,7 @@ export default function App() {
         </Routes>
       </main>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
