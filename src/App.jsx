@@ -3,7 +3,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 // Layout Components
-import Navbar from "./components/layout/Navbar";
+import Navbar from "./Components/layout/Navbar";
 // import Sidebar from "./components/layout/Sidebar";
 // import Footer from "./components/layout/Footer";
 
