@@ -8,7 +8,7 @@ import Contact from "../../assets/icons/Contact.svg?react";
 
 export default function Sidebar() {
   return (
-     <aside className="h-screen w-64 bg-[#1F1E3E] text-[#F8FBE6]">
+    <aside className="h-screen w-64 bg-[#1F1E3E] text-[#F8FBE6] overflow-y-auto scrollbar-hide sm:hidden">
       {/* Sidebar Header */}
       <div className="flex items-center gap-4 p-4 bg-[#F27C66]">
         <Profile className="h-6 w-6 text-[#1F1E3E]" />
