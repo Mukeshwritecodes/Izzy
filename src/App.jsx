@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // Layout Components
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import HeroSection from "./Components/HeroSection";
 
 // Pages (commented for now)
 // import Home from "./pages/Home";
@@ -23,6 +24,7 @@ export default function App() {
       {/* <Sidebar /> */}
 
       <main className="flex-1">
+        <HeroSection />
         <Routes>
           {/* <Route path="/" element={<Home />} />
           <Route path="/catalog" element={<Catalog />} />
