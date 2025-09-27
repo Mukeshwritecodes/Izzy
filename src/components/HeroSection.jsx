@@ -1,6 +1,7 @@
 import { useState } from "react";
 import WindowDay from "../Assets/Images/Window_day.png";
 import WindowNight from "../Assets/Images/Window_night.png";
+import Branch from "../Assets/Images/Branch.png";
 
 export default function HeroSection() {
   const [isDay, setIsDay] = useState(true);
@@ -10,28 +11,31 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="flex items-center justify-between pl-2 pr-4 sm-pl-12 py-6 sm-pr-16 sm:py-16 bg-gradient-to-r from-white to-pink-100 overflow-hidden">
-      <div className="flex items-center ">
+    <section className="flex items-center justify-between gap-4 pl-3 pr-4 sm:pl-10 py-4 sm:pr-12 sm:py-16 bg-gradient-to-r from-white to-pink-100 overflow-hidden relative">
+      <div className="flex items-center">
         {/* Left side - Text content */}
-        <div className="space-y-4 sm:space-y-6">
+        <div className="space-y-4  sm:space-y-6">
           {/* Main headline */}
-          <h1 className="text-xl sm:text-4xl lg:text-[64px] font-bold text-[#725782]" style={{ fontFamily: "Lora, serif" }}>
+          <h1 className="text-lg sm:text-4xl lg:text-[64px] font-bold text-[#725782]" style={{ fontFamily: "Lora, serif" }}>
             Step Into Worlds Untold
           </h1>
 
           {/* Description */}
-          <p className="text-sm sm:text-xl lg:text-2xl text-[#AD96BB] leading-relaxed max-w-lg" style={{ fontFamily: "Lora, serif" }}>
+          <p className="text-xs sm:text-xl lg:text-2xl text-[#AD96BB] leading-relaxed max-w-lg" style={{ fontFamily: "Lora, serif" }}>
             Lose yourself in stories that bloom beyond the page.
           </p>
 
           {/* CTA Button */}
-
-          <button className="bg-[#1F1E3E] text-white px-8 py-2 rounded-full text-[10px] font-serif font-medium hover:bg-[#2A2847] transition-all duration-300 border-[#1F1FE3E] ">Explore Books</button>
+          <div className="relative">
+            <button className="bg-[#1F1E3E] text-white px-8 py-2 sm:px-10 sm:py-4 rounded-full text-[10px] sm:text-[20px] font-serif font-medium hover:bg-[#2A2847] transition-all duration-300 border-[#1F1E3E]">Explore Books</button>
+            <div className="border-1 border-[#1F1E3E] translate-y-[-24px] sm:translate-y-[-48px]  w-32 h-8 sm:w-52 sm:h-14 transition-all translate-x-[6px] rounded-full absolute"></div>
+          </div>
         </div>
       </div>
       <div className="">
         <img src={isDay ? WindowDay : WindowNight} alt={isDay ? "Day window view" : "Night window view"} onClick={toggleWindow} className="w-42 min-w-24 sm:w-56 md:w-72 lg:w-90 xl:w-[24rem] h-auto cursor-pointer" />
       </div>
+      <img src={Branch} alt="Decorative branch" className="absolute w-68 h-68 bottom-0 left-0" />
     </section>
   );
 }

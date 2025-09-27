@@ -86,17 +86,8 @@ export default function Navbar() {
       </ul>
 
       {/* Search bar for mobile */}
-<<<<<<< HEAD
-      <div className="sm: hidden flex w-full py-3 px-20 relative">
-        <input
-          type="text"
-          placeholder="Search"
-          className="w-full h-8 bg-white text-[#888888] p-2 focus:outline-none rounded-[8px] text-[12px]"
-        />
-=======
       <div className="sm:hidden flex w-full py-3 px-20 relative">
         <input type="text" placeholder="Search" className="w-full h-8 bg-white text-[#888888] p-2 focus:outline-none rounded-[8px] text-[12px]" />
->>>>>>> 34f1729a577261ea262adc2e172b380a7d184daf
         <button className="bg-[#B787B6] absolute right-20 top-1/2 transform -translate-y-1/2 flex items-center justify-center h-8 px-4 rounded-r-[8px] ">
           <SearchWhite className="h-4 w-4 absolute pointer-events-none " />
         </button>
