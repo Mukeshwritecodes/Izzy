@@ -104,7 +104,7 @@ export default function Navbar() {
       </ul>
 
       {/* Search bar for mobile */}
-      <div className="sm:hidden flex w-full py-3 px-20 relative">
+      <div className="sm: hidden flex w-full py-3 px-20 relative">
         <input
           type="text"
           placeholder="Search"
