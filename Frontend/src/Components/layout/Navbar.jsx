@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+// 1. ADD Link import from React Router DOM
+import { Link } from "react-router-dom";
 import Logo from "../../Assets/Icons/Logo.svg?react";
 import Heart from "../../Assets/Icons/Heart.svg?react";
 import Cart from "../../Assets/Icons/Cart.svg?react";
@@ -49,19 +51,24 @@ export default function Navbar() {
             className="block h-8 w-8 sm:hidden text-[#F8FBE6] cursor-pointer"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           />
-          <Logo className="flex-shrink-0 h-8 sm:h-12  lg:h-14  pt-1" />
+          <Logo className="flex-shrink-0 h-8 sm:h-12  lg:h-14  pt-1" />
         </div>
         <div className="hidden sm:block relative w-full max-w-160">
           <input
             type="text"
             placeholder="Search"
             className="w-full h-13 bg-white text-[#888888] p-3 focus:outline-none rounded-2xl"
-            />
+          />
           <Search className="h-5 w-5 absolute pointer-events-none transform -translate-y-1/2 top-1/2 right-3" />
         </div>
         <div className="flex items-center gap-6 sm:gap-8 w-auto">
-          <Heart className="h-5 w-5  sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer" />
-          <Cart className="h-5 w-5 sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer" />
+          <Heart className="h-5 w-5  sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer" />
+          
+          {/* 2. WRAP THE CART ICON WITH THE LINK COMPONENT */}
+          <Link to="/cart" aria-label="Go to shopping cart">
+            <Cart className="h-5 w-5 sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer" />
+          </Link>
+
           <div className="relative" ref={profileRef}>
             <Profile
               className=" h-5 w-5 sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer"
@@ -109,8 +116,7 @@ export default function Navbar() {
           type="text"
           placeholder="Search"
           className="w-full h-8 bg-white text-[#888888] p-2 focus:outline-none rounded-[8px] text-[12px]"
-          /> {/* <--- The essential self-closing slash was added here */}
-
+        />
         <button className="bg-[#B787B6] absolute right-20 top-1/2 transform -translate-y-1/2 flex items-center justify-center h-8 px-4 rounded-r-[8px] ">
           <SearchWhite className="h-4 w-4 absolute pointer-events-none " />
         </button>

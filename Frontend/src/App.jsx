@@ -4,13 +4,13 @@ import { Routes, Route } from "react-router-dom";
 // Layout Components
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import HeroSection from "./Components/HeroSection";
+import HeroSection from "./Components/HeroSection"; // Assuming this is also used
 
-// Pages (commented for now)
+// Pages (Updated imports)
 import Home from "./pages/Home";
+import Cart from "./pages/Cart"; // <-- UNCOMMENTED: Import the Cart page component
 // import Catalog from "./pages/Catalog";
 // import Product from "./pages/Product";
-// import Cart from "./pages/Cart";
 // import Checkout from "./pages/Checkout";
 // import Contact from "./pages/Contact";
 // import Blog from "./Pages/Blog";
@@ -21,14 +21,18 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
-      {/* <Sidebar /> */}
+      {/* <Sidebar /> - Rendered inside Navbar */}
 
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+          
+          {/* Cart Route definition */}
+          <Route path="/cart" element={<Cart />} /> {/* <-- UNCOMMENTED: Define the route path */}
+          
+          {/* Other commented routes */}
           {/* <Route path="/catalog" element={<Catalog />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
