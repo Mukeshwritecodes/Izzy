@@ -11,7 +11,8 @@ export default {
       },
       fontFamily: {
         lora: ["Lora", "serif"],
-        jura: ["Jura", "sans-serif"], // Add 'Jura' to the font family
+        jura: ["Jura", "sans-serif"],
+        grover: ["Irish Grover", "cursive"],
         // You can add more custom fonts here
         // 'sans': ['Inter', 'sans-serif'], // Example of overriding the default sans
       },

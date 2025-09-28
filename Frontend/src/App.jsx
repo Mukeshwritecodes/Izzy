@@ -4,40 +4,42 @@ import { Routes, Route } from "react-router-dom";
 // Layout Components
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import HeroSection from "./Components/HeroSection"; // Assuming this is also used
+// NOTE: HeroSection must be placed on the Home page, not here in the global App file.
+// import HeroSection from "./Components/HeroSection"; 
 
-// Pages (Updated imports)
+// Pages 
 import Home from "./pages/Home";
-import Cart from "./pages/Cart"; // <-- UNCOMMENTED: Import the Cart page component
+import Cart from "./pages/Cart";              // <-- Your new Cart component
+import UserProfile from "./pages/UserProfile"; // <-- Assuming path is lowercase pages/
+import UserOrder from "./pages/UserOrder";   // <-- Assuming path is pages/
+// Add any other pages your friend or you have active:
 // import Catalog from "./pages/Catalog";
 // import Product from "./pages/Product";
 // import Checkout from "./pages/Checkout";
 // import Contact from "./pages/Contact";
-// import Blog from "./Pages/Blog";
-// import UserProfile from "./pages/UserProfile";
-// import UserOrder from "./pages/UserOrder";
+// import Blog from "./pages/Blog"; 
 
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
-      {/* <Sidebar /> - Rendered inside Navbar */}
 
       <main className="flex-1">
         <Routes>
+          {/* Main Pages */}
           <Route path="/" element={<Home />} />
-          
-          {/* Cart Route definition */}
-          <Route path="/cart" element={<Cart />} /> {/* <-- UNCOMMENTED: Define the route path */}
-          
-          {/* Other commented routes */}
-          {/* <Route path="/catalog" element={<Catalog />} />
-          <Route path="/product/:id" element={<Product />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/cart" element={<Cart />} /> 
+
+          {/* User Account Pages (from remote repository) */}
           <Route path="/profile" element={<UserProfile />} />
-          <Route path="/orders" element={<UserOrder />} /> */}
+          <Route path="/orders" element={<UserOrder />} />
+
+          {/* Uncomment other routes as you build those pages: */}
+          {/* <Route path="/catalog" element={<Catalog />} /> */}
+          {/* <Route path="/product/:id" element={<Product />} /> */}
+          {/* <Route path="/checkout" element={<Checkout />} /> */}
+          {/* <Route path="/contact" element={<Contact />} /> */}
+          {/* <Route path="/blog" element={<Blog />} /> */}
         </Routes>
       </main>
 
