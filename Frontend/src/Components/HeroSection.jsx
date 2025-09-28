@@ -11,7 +11,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="flex items-center justify-between gap-4 pl-3 pr-4 sm:pl-10 py-4 sm:pr-12 sm:py-16 bg-gradient-to-tr  from-white to-pink-100 overflow-hidden relative">
+    <section className={`flex items-center justify-between gap-4 pl-3 pr-4 sm:pl-10 py-4 sm:pr-12 sm:py-16 overflow-hidden relative transition-colors duration-700 ease-in-out ${isDay ? "bg-gradient-to-tr from-white to-pink-100" : "bg-gradient-to-tr from-white to-purple-300"}`}>
       <div className="flex items-center ">
         {/* Left side - Text content */}
         <div className="space-y-4 sm:space-y-10">
@@ -27,7 +27,7 @@ export default function HeroSection() {
 
           {/* CTA Button */}
           <div className="relative z-10">
-            <button className="bg-[#1F1E3E] text-white px-8 py-2 sm:px-10 sm:py-4 rounded-full text-[10px] sm:text-[20px] font-serif font-medium  hover:bg-[#2A2847] hover:cursor-pointer transition-all duration-300 border-[#1F1E3E] absolute translate-y-[-4px] sm:translate-y-[-16px] translate-x-[-2px]">Explore Books</button>
+            <button className="bg-[#1F1E3E] text-white px-8 py-2 sm:px-10 sm:py-4 rounded-full text-[10px] sm:text-[20px] font-serif font-medium hover:bg-[#2A2847] hover:cursor-pointer transition-all duration-300 border-[#1F1E3E] absolute translate-y-[-4px] sm:translate-y-[-16px] translate-x-[-2px]">Explore Books</button>
             <div className="border-1 border-[#1F1E3E]   w-32 h-8 sm:w-52 sm:h-14 transition-all  rounded-full "></div>
           </div>
         </div>

@@ -7,7 +7,7 @@ import Footer from "./components/layout/Footer";
 import HeroSection from "./Components/HeroSection";
 
 // Pages (commented for now)
-// import Home from "./pages/Home";
+import Home from "./pages/Home";
 // import Catalog from "./pages/Catalog";
 // import Product from "./pages/Product";
 // import Cart from "./pages/Cart";
@@ -24,10 +24,9 @@ export default function App() {
       {/* <Sidebar /> */}
 
       <main className="flex-1">
-        <HeroSection />
         <Routes>
-          {/* <Route path="/" element={<Home />} />
-          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/catalog" element={<Catalog />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />

@@ -10,7 +10,8 @@ export default {
         lg: "1024px",
       },
       fontFamily: {
-        lora: ["Lora", "serif"], // Add 'Lora' to the font family
+        lora: ["Lora", "serif"],
+        jura: ["Jura", "sans-serif"], // Add 'Jura' to the font family
         // You can add more custom fonts here
         // 'sans': ['Inter', 'sans-serif'], // Example of overriding the default sans
       },
