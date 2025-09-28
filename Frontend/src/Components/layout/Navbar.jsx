@@ -75,7 +75,7 @@ export default function Navbar() {
       <div className="pt-4 px-4 sm:py-4 sm:px-6 flex justify-between items-center gap-auto w-full">
         <div className=" flex items-center gap-4">
           <Hamburger 
-            className="block h-8 w-8 sm:hidden text-[#F8FBE6]  cursor-pointer" 
+            className="block h-7 w-7 sm:hidden text-[#F8FBE6]  cursor-pointer" 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
           />
           {/* Logo links to Home page */}
