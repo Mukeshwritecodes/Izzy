@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../Assets/Icons/Logo.svg?react";
 import Heart from "../../Assets/Icons/Heart.svg?react";
 import Cart from "../../Assets/Icons/Cart.svg?react";
@@ -13,8 +14,10 @@ export default function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const profileRef = useRef(null);
   const sidebarRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -61,7 +64,9 @@ export default function Navbar() {
       <div className="pt-4 px-4 sm:py-4 sm:px-6 flex justify-between items-center gap-auto w-full">
         <div className=" flex items-center gap-4">
           <Hamburger className="block h-8 w-8 sm:hidden text-[#F8FBE6]  cursor-pointer" onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
-          <Logo className="flex-shrink-0 h-8 sm:h-12  lg:h-14  pt-1" />
+          <button onClick={() => navigate("/")} aria-label="Go to home">
+            <Logo className="flex-shrink-0 h-8 sm:h-12  lg:h-14  pt-1 hover:cursor-pointer" />
+          </button>
         </div>
         <div className="hidden sm:block relative w-full max-w-160 mx-4">
           <input type="text" placeholder="Search" className="w-full h-13 bg-white text-[#888888] p-3 focus:outline-none rounded-2xl" />
@@ -80,9 +85,20 @@ export default function Navbar() {
 
                 {/* The Login button itself */}
                 <div className="bg-white rounded-lg shadow-sm border border-black p-1 z-10 relative">
-                  <a onClick={() => setIsLoginOpen(true)} className="block w-full text-center px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100 hover:underline cursor-pointer">
-                    Sign up
-                  </a>
+                  {isAuthenticated ? (
+                    <div className="flex flex-col">
+                      <a href="/profile" className="block w-full text-left px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100 hover:underline">
+                        Profile
+                      </a>
+                      <button onClick={() => setIsAuthenticated(false)} className="block w-full text-left px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100">
+                        Logout
+                      </button>
+                    </div>
+                  ) : (
+                    <a onClick={() => setIsLoginOpen(true)} className="block w-full text-center px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100 hover:underline cursor-pointer">
+                      Sign up
+                    </a>
+                  )}
                 </div>
               </div>
             )}
@@ -92,7 +108,11 @@ export default function Navbar() {
 
       {/* Links for desktop */}
       <ul className=" bg-[#B787B6] hidden sm:flex items-center justify-center gap-4 py-1">
-        <li className="text-[#F8FBE6] hover:underline cursor-pointer">Home</li>
+        <li className="text-[#F8FBE6] hover:underline cursor-pointer">
+          <button onClick={() => navigate("/")} className="text-[#F8FBE6] hover:underline cursor-pointer">
+            Home
+          </button>
+        </li>
         <p className="text-[#F8FBE6]">|</p>
         <li className="text-[#F8FBE6] hover:underline cursor-pointer">Genres</li>
         <p className="text-[#F8FBE6]">|</p>
@@ -104,7 +124,7 @@ export default function Navbar() {
         <p className="text-[#F8FBE6]">|</p>
         <li className="text-[#F8FBE6] hover:underline cursor-pointer">Contact</li>
       </ul>
-
+            
       {/* Search bar for mobile */}
       <div className="sm:hidden flex w-full py-3 px-20 relative">
         <input type="text" placeholder="Search" className="w-full h-8 bg-white text-[#888888] p-2 focus:outline-none rounded-[8px] text-[12px]" />
@@ -112,7 +132,16 @@ export default function Navbar() {
           <SearchWhite className="h-4 w-4 absolute pointer-events-none " />
         </button>
       </div>
-      {isLoginOpen && <LoginFlow onClose={() => setIsLoginOpen(false)} />}
+      {isLoginOpen && (
+        <LoginFlow
+          onClose={() => setIsLoginOpen(false)}
+          onSignUpSuccess={(payload) => {
+            setIsAuthenticated(true);
+            setIsLoginOpen(false);
+            navigate("/profile");
+          }}
+        />
+      )}
     </nav>
   );
 }

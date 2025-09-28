@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
-export default function LoginFlow({ onClose }) {
+export default function LoginFlow({ onClose, onSignUpSuccess }) {
   const [step, setStep] = useState("phone"); // 'phone' | 'otp'
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -53,6 +53,7 @@ export default function LoginFlow({ onClose }) {
     onClose();
     // show a small success toast on the page after closing
     showToast("Account created successfully");
+    if (typeof onSignUpSuccess === "function") onSignUpSuccess(payload);
   }
 
   function showToast(message, duration = 3000) {

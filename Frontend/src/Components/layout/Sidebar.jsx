@@ -10,34 +10,51 @@ export default function Sidebar() {
   return (
     <aside className="h-screen w-64 bg-[#1F1E3E] text-[#F8FBE6] overflow-y-auto scrollbar-hide sm:hidden">
       {/* Sidebar Header */}
-      <div className="flex items-center gap-4 p-4 bg-[#F27C66]">
+      <a href="/profile" className="flex items-center gap-4 p-4 bg-[#F27C66]">
         <Profile className="h-6 w-6 text-[#1F1E3E]" />
         <span className="text-xl font-semibold">Hi, user</span>
-      </div>
+      </a>
 
       {/* Sidebar Navigation Links */}
       <ul className="flex flex-col gap-4 p-4">
         <li className="flex items-center gap-4 text-white hover:bg-gray-700 p-2 rounded-lg cursor-pointer">
-          <Genres className="h-6 w-6" />
-          <span>Genres</span>
+          <a href="/" className="flex items-center gap-4 w-full">
+            <Genres className="h-6 w-6" />
+            <span>Genres</span>
+          </a>
         </li>
         <li className="flex items-center gap-4 text-white hover:bg-gray-700 p-2 rounded-lg cursor-pointer">
-          <BestSellers className="h-6 w-6" />
-          <span>Best Sellers</span>
+          <a href="/best-sellers" className="flex items-center gap-4 w-full">
+            <BestSellers className="h-6 w-6" />
+            <span>Best Sellers</span>
+          </a>
         </li>
         <li className="flex items-center gap-4 text-white hover:bg-gray-700 p-2 rounded-lg cursor-pointer">
-          <NewArrivals className="h-6 w-6" />
-          <span>New Arrivals</span>
+          <a href="/new-arrivals" className="flex items-center gap-4 w-full">
+            <NewArrivals className="h-6 w-6" />
+            <span>New Arrivals</span>
+          </a>
         </li>
         <li className="flex items-center gap-4 text-white hover:bg-gray-700 p-2 rounded-lg cursor-pointer">
-          <Blog className="h-6 w-6" />
-          <span>Blog</span>
+          <a href="/blog" className="flex items-center gap-4 w-full">
+            <Blog className="h-6 w-6" />
+            <span>Blog</span>
+          </a>
         </li>
         <li className="flex items-center gap-4 text-white hover:bg-gray-700 p-2 rounded-lg cursor-pointer">
-          <Contact className="h-6 w-6" />
-          <span>Contact</span>
+          <a href="/contact" className="flex items-center gap-4 w-full">
+            <Contact className="h-6 w-6" />
+            <span>Contact</span>
+          </a>
         </li>
       </ul>
+
+      <div className="mt-auto p-4">
+        <button className="flex items-center gap-2 text-left text-white bg-transparent hover:bg-gray-700 p-2 rounded-lg">
+          <span className="">←</span>
+          <span>Log out</span>
+        </button>
+      </div>
     </aside>
   );
 }

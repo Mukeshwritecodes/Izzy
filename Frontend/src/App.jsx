@@ -8,6 +8,8 @@ import HeroSection from "./Components/HeroSection";
 
 // Pages (commented for now)
 import Home from "./pages/Home";
+import UserProfile from "./Pages/UserProfile";
+import UserOrder from "./Pages/UserOrder";
 // import Catalog from "./pages/Catalog";
 // import Product from "./pages/Product";
 // import Cart from "./pages/Cart";
@@ -26,6 +28,8 @@ export default function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/orders" element={<UserOrder />} />
           {/* <Route path="/catalog" element={<Catalog />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
