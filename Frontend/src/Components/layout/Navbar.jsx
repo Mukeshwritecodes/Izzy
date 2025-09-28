@@ -7,10 +7,12 @@ import Search from "../../Assets/Icons/Search.svg?react";
 import SearchWhite from "../../Assets/Icons/SearchWhite.svg?react";
 import Hamburger from "../../Assets/Icons/Hamburger.svg?react";
 import Sidebar from "./Sidebar";
+import LoginFlow from "../LoginFlow";
 
 export default function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const profileRef = useRef(null);
   const sidebarRef = useRef(null);
 
@@ -23,24 +25,42 @@ export default function Navbar() {
         setIsSidebarOpen(false);
       }
     }
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        setIsLoginOpen(false);
+      }
+    }
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [profileRef, sidebarRef]);
+
+  // Prevent background scroll when login modal is open
+  useEffect(() => {
+    if (isLoginOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [isLoginOpen]);
 
   return (
     //Main wrapper
     <nav className="flex-col w-full gap-0 bg-[#1F1E3E]">
       {/* Sidebar container (for mobile) */}
-      <div ref={sidebarRef} className={`fixed top-0 left-0 h-full z-50 transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <div ref={sidebarRef} className={`fixed top-0 left-[-1px] h-full z-50 transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <Sidebar />
       </div>
 
       {/* Top nav bar */}
-      <div className="py-2 px-4 sm:py-4 sm:px-6 flex justify-between items-center gap-auto w-full">
+      <div className="pt-4 px-4 sm:py-4 sm:px-6 flex justify-between items-center gap-auto w-full">
         <div className=" flex items-center gap-4">
-          <Hamburger className="block h-8 w-8 sm:hidden text-[#F8FBE6] cursor-pointer" onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
+          <Hamburger className="block h-8 w-8 sm:hidden text-[#F8FBE6]  cursor-pointer" onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
           <Logo className="flex-shrink-0 h-8 sm:h-12  lg:h-14  pt-1" />
         </div>
         <div className="hidden sm:block relative w-full max-w-160 mx-4">
@@ -56,12 +76,12 @@ export default function Navbar() {
             {isProfileOpen && (
               <div className="absolute top-full right-0 mt-4 w-32">
                 {/* The small triangular caret */}
-                <div className="absolute -top-[6px] right-2 w-3 h-3 bg-[#B787B6] transform rotate-45 z-0"></div>
+                <div className="absolute top-[-4px] right-2 w-3 h-3 bg-[#B787B6] transform rotate-45 z-0"></div>
 
                 {/* The Login button itself */}
                 <div className="bg-white rounded-lg shadow-sm border border-black p-1 z-10 relative">
-                  <a href="/login" className="block w-full text-center px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100 hover:underline cursor-pointer">
-                    Log In
+                  <a onClick={() => setIsLoginOpen(true)} className="block w-full text-center px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100 hover:underline cursor-pointer">
+                    Sign up
                   </a>
                 </div>
               </div>
@@ -92,6 +112,7 @@ export default function Navbar() {
           <SearchWhite className="h-4 w-4 absolute pointer-events-none " />
         </button>
       </div>
+      {isLoginOpen && <LoginFlow onClose={() => setIsLoginOpen(false)} />}
     </nav>
   );
 }

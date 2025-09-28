@@ -18,7 +18,9 @@ export default function Footer() {
             {/* About Izzy */}
             <div>
               <span className="text-[#F27C66] text-xl font-bold mb-4">About</span>
-              <span className="ml-2 text-2xl font-semibold">Izzy</span>
+              <span className="ml-2 text-2xl font-semibold" style={{ fontFamily: "grover, cursive" }}>
+                Izzy
+              </span>
               <div className="bg-gradient-to-tr from-[#CCA1E5] to-white bg-clip-text text-transparent text-sm italic leading-relaxed">"Izzy opens the door to realms untold—where fiction breathes and imagination unfolds"</div>
             </div>
 
@@ -134,7 +136,7 @@ export default function Footer() {
           <div>
             <div className="mb-2">
               <span className="text-2xl font-semibold">
-                <span className="text-[#F27C66]">About</span> <span className="text-white">Izzy</span>
+                <span className="text-[#F27C66]">About</span> <span className="text-white font-normal" style={{fontFamily: "Irish Grover, cursive"}}>Izzy</span>
               </span>
             </div>
             <p className="text-sm italic bg-gradient-to-tr from-[#CCA1E5] to-white bg-clip-text text-transparent">"Izzy opens the door to realms untold—where fiction breathes and imagination unfolds"</p>
