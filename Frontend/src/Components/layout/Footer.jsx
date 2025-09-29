@@ -18,10 +18,10 @@ export default function Footer() {
             {/* About Izzy */}
             <div>
               <span className="text-[#F27C66] text-xl font-bold mb-4">About</span>
-              <span className="ml-2 text-2xl font-semibold" style={{ fontFamily: "grover, cursive" }}>
+              <span className="ml-2 text-2xl font-regular" style={{ fontFamily: "irish grover, cursive" }}>
                 Izzy
               </span>
-              <div className="bg-gradient-to-tr from-[#CCA1E5] to-white bg-clip-text text-transparent text-sm italic leading-relaxed">"Izzy opens the door to realms untold—where fiction breathes and imagination unfolds"</div>
+              <div className="bg-gradient-to-tl from-[#CCA1E5] to-white bg-clip-text text-transparent text-sm italic leading-relaxed">"Izzy opens the door to realms untold—where fiction breathes and imagination unfolds"</div>
             </div>
 
             {/* Quick Links */}
@@ -103,7 +103,7 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-[#F27C66] transition-colors">
+                  <a href="#" className="hover:text-[#F27C66] transition-colors ">
                     Pinterest
                   </a>
                 </li>
@@ -119,10 +119,10 @@ export default function Footer() {
           {/* Bottom Section with Social Icons and Copyright */}
           <div className="flex flex-col items-center mt-12">
             <div className="flex justify-center space-x-6 mb-4">
-              <Instagram className="h-6 w-6 text-[#F8FBE6] hover:stroke-[#F27C66] cursor-pointer transition-colors" />
-              <Facebook className="h-6 w-6 text-[#F8FBE6] hover:stroke-[#F27C66] cursor-pointer transition-colors" />
-              <Twitter className="h-6 w-6 text-[#F8FBE6] hover:fill-[#F27C66] cursor-pointer transition-colors" />
-              <Pinterest className="h-6 w-6 text-[#F8FBE6] hover:fill-[#F27C66] cursor-pointer transition-colors" />
+              <Instagram className="h-5 w-5 text-[#F8FBE6] hover:stroke-[#F27C66] cursor-pointer transition-colors" />
+              <Facebook className="h-5 w-5 text-[#F8FBE6] hover:stroke-[#F27C66] cursor-pointer transition-colors" />
+              <Twitter className="h-5 w-5 text-[#F8FBE6] hover:fill-[#F27C66] cursor-pointer transition-colors" />
+              <Pinterest className="h-5 w-5 text-[#F8FBE6] hover:fill-[#F27C66] cursor-pointer transition-colors" />
             </div>
             <div className="text-[#F8FBE6] text-sm">© 2025 Izzy. All rights reserved.</div>
           </div>
@@ -136,7 +136,10 @@ export default function Footer() {
           <div>
             <div className="mb-2">
               <span className="text-2xl font-semibold">
-                <span className="text-[#F27C66]">About</span> <span className="text-white font-normal" style={{fontFamily: "Irish Grover, cursive"}}>Izzy</span>
+                <span className="text-[#F27C66]">About</span>{" "}
+                <span className="text-white font-normal" style={{ fontFamily: "Irish Grover, cursive" }}>
+                  Izzy
+                </span>
               </span>
             </div>
             <p className="text-sm italic bg-gradient-to-tr from-[#CCA1E5] to-white bg-clip-text text-transparent">"Izzy opens the door to realms untold—where fiction breathes and imagination unfolds"</p>

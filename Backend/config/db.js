@@ -1,7 +1,6 @@
-import mysql from "mysql2/promise";
-import dotenv from "dotenv";
-
-dotenv.config();
+require("dotenv").config();
+const mysql = require("mysql2/promise");
+const fs = require("fs");
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -12,6 +11,12 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  ssl: {
+    // This is often required for cloud databases like Aiven
+    // You'll need to download your CA certificate file
+    ca: fs.readFileSync("./ca.pem"),
+  },
 });
 
-export default pool;
+console.log("MySQL Connection Pool Created.");
+module.exports = pool;

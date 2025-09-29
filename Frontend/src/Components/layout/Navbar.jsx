@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-// 1. ADD Link import for Cart navigation
-import { Link, useNavigate } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Assets/Icons/Logo.svg?react";
 import Heart from "../../Assets/Icons/Heart.svg?react";
 import Cart from "../../Assets/Icons/Cart.svg?react";
@@ -9,19 +8,19 @@ import Search from "../../Assets/Icons/Search.svg?react";
 import SearchWhite from "../../Assets/Icons/SearchWhite.svg?react";
 import Hamburger from "../../Assets/Icons/Hamburger.svg?react";
 import Sidebar from "./Sidebar";
-import LoginFlow from "../LoginFlow"; // Assuming this is the path to your Login component
+import LoginFlow from "../LoginFlow"; // Path to your Login component
 
 export default function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  // NOTE: isAuthenticated state is mock for now; usually managed by context/auth service
-  const [isAuthenticated, setIsAuthenticated] = useState(false); 
+  // NOTE: This mock state will be replaced by your auth context logic
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const profileRef = useRef(null);
   const sidebarRef = useRef(null);
   const navigate = useNavigate();
 
-  // Effect to handle closing profile dropdown and sidebar when clicking outside
+  // Effect to handle closing menus when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -31,7 +30,7 @@ export default function Navbar() {
         setIsSidebarOpen(false);
       }
     }
-    
+
     // Effect to close login modal with Escape key
     function handleKeyDown(event) {
       if (event.key === "Escape") {
@@ -47,57 +46,52 @@ export default function Navbar() {
     };
   }, [profileRef, sidebarRef]);
 
-  // Effect to prevent background scroll when login modal is open
+  // Effect to prevent background scroll when modal is open
   useEffect(() => {
     if (isLoginOpen) {
-      const prev = document.body.style.overflow;
+      const originalStyle = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       return () => {
-        document.body.style.overflow = prev;
+        document.body.style.overflow = originalStyle;
       };
     }
   }, [isLoginOpen]);
 
+  // Handler for successful authentication
+  const handleAuthSuccess = () => {
+    setIsAuthenticated(true); // Update auth state
+    setIsLoginOpen(false); // Close modal
+    navigate("/profile"); // Redirect to profile page
+  };
+
   return (
     //Main wrapper
     <nav className="flex-col w-full gap-0 bg-[#1F1E3E]">
-      
       {/* Sidebar container (for mobile) */}
-      {/* Uses left-[-1px] to ensure the shadow/border appears correctly */}
-      <div 
-        ref={sidebarRef} 
-        className={`fixed top-0 left-[-1px] h-full z-50 transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
-      >
+      <div ref={sidebarRef} className={`fixed top-0 left-[-1px] h-full z-50 transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <Sidebar />
       </div>
 
       {/* Top nav bar */}
       <div className="pt-4 px-4 sm:py-4 sm:px-6 flex justify-between items-center gap-auto w-full">
         <div className=" flex items-center gap-4">
-          <Hamburger 
-            className="block h-7 w-7 sm:hidden text-[#F8FBE6]  cursor-pointer" 
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
-          />
+          <Hamburger className="block h-7 w-7 sm:hidden text-[#F8FBE6]  cursor-pointer" onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
           {/* Logo links to Home page */}
           <button onClick={() => navigate("/")} aria-label="Go to home">
-            <Logo className="flex-shrink-0 h-8 sm:h-12  lg:h-14  pt-1 hover:cursor-pointer" />
+            <Logo className="flex-shrink-0 h-8 sm:h-12  lg:h-14  pt-1 hover:cursor-pointer" />
           </button>
         </div>
-        
+
         {/* Search Bar (Desktop) */}
         <div className="hidden sm:block relative w-full max-w-160">
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full h-13 bg-white text-[#888888] p-3 focus:outline-none rounded-2xl"
-          />
+          <input type="text" placeholder="Search" className="w-full h-13 bg-white text-[#888888] p-3 focus:outline-none rounded-2xl" />
           <Search className="h-5 w-5 absolute pointer-events-none transform -translate-y-1/2 top-1/2 right-3" />
         </div>
-        
+
         {/* Icons (Heart, Cart, Profile) */}
         <div className="flex items-center gap-6 sm:gap-8 w-auto">
-          <Heart className="h-5 w-5  sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer" />
-          
+          <Heart className="h-5 w-5  sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer" />
+
           {/* Cart Icon wrapped with React Router Link */}
           <Link to="/cart" aria-label="Go to shopping cart">
             <Cart className="h-5 w-5 sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer" />
@@ -105,10 +99,7 @@ export default function Navbar() {
 
           {/* Profile Dropdown */}
           <div className="relative" ref={profileRef}>
-            <Profile
-              className=" h-5 w-5 sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer"
-              onClick={() => setIsProfileOpen(!isProfileOpen)}
-            />
+            <Profile className=" h-5 w-5 sm:h-6 sm:w-6 text-[#F8FBE6] hover:text-gray-300 cursor-pointer" onClick={() => setIsProfileOpen(!isProfileOpen)} />
 
             {isProfileOpen && (
               <div className="absolute top-full right-0 mt-4 w-32">
@@ -127,15 +118,24 @@ export default function Navbar() {
                     </div>
                   ) : (
                     <div className="flex flex-col">
-                      <a 
-                        href="/login"
+                      <button
+                        onClick={() => {
+                          setIsLoginOpen(true);
+                          setIsProfileOpen(false);
+                        }}
                         className="block w-full text-center px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100 hover:underline cursor-pointer"
                       >
                         Log In
-                      </a>
-                      <a onClick={() => setIsLoginOpen(true)} className="block w-full text-center px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100 hover:underline cursor-pointer">
+                      </button>
+                      <button
+                        onClick={() => {
+                          setIsLoginOpen(true);
+                          setIsProfileOpen(false);
+                        }}
+                        className="block w-full text-center px-4 py-1 text-[16px] text-[#1f1e3e] rounded-md hover:bg-gray-100 hover:underline cursor-pointer"
+                      >
                         Sign up
-                      </a>
+                      </button>
                     </div>
                   )}
                 </div>
@@ -166,27 +166,14 @@ export default function Navbar() {
 
       {/* Search bar for mobile */}
       <div className="sm:hidden flex w-full py-3 px-20 relative">
-        <input
-          type="text"
-          placeholder="Search"
-          className="w-full h-8 bg-white text-[#888888] p-2 focus:outline-none rounded-[8px] text-[12px]"
-        />
+        <input type="text" placeholder="Search" className="w-full h-8 bg-white text-[#888888] p-2 focus:outline-none rounded-[8px] text-[12px]" />
         <button className="bg-[#B787B6] absolute right-20 top-1/2 transform -translate-y-1/2 flex items-center justify-center h-8 px-4 rounded-r-[8px] ">
           <SearchWhite className="h-4 w-4 absolute pointer-events-none " />
         </button>
       </div>
-      
+
       {/* Login Modal/Flow Component */}
-      {isLoginOpen && (
-        <LoginFlow
-          onClose={() => setIsLoginOpen(false)}
-          onSignUpSuccess={() => {
-            setIsAuthenticated(true);
-            setIsLoginOpen(false);
-            navigate("/profile");
-          }}
-        />
-      )}
+      {isLoginOpen && <LoginFlow onClose={() => setIsLoginOpen(false)} onSignUpSuccess={handleAuthSuccess} />}
     </nav>
   );
 }
