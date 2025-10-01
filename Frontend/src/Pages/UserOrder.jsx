@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios"; // Use the central API instance
 import { useAuth } from "../context/AuthContext";
 import jsPDF from "jspdf";
 
@@ -19,18 +19,16 @@ export default function UserOrder() {
         return;
       }
       try {
-        const response = await axios.get("http://localhost:5000/api/orders", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        // 1. SIMPLIFIED API CALL: The auth token is now added automatically by the axios interceptor.
+        // No need for a separate headers object.
+        const response = await api.get("/api/orders");
 
-        // --- THIS IS THE FIX ---
-        // Sanitize the data from the backend to ensure correct data types.
         const sanitizedOrders = response.data.map((order) => ({
           ...order,
-          total: Number(order.total), // Convert total from string to number
+          total: Number(order.total),
           items: order.items.map((item) => ({
             ...item,
-            subtotal: Number(item.subtotal), // Convert subtotal from string to number
+            subtotal: Number(item.subtotal),
           })),
         }));
 
@@ -98,7 +96,7 @@ export default function UserOrder() {
           <Link to="/profile" className="hover:underline">
             My Profile
           </Link>
-          <Link to="/orders" className="underline font-semibold ">
+          <Link to="/orders" className="underline font-semibold">
             My Orders
           </Link>
         </nav>
@@ -109,7 +107,7 @@ export default function UserOrder() {
         </div>
       </aside>
 
-      <main className="flex-1 p-8 ">
+      <main className="flex-1 p-8 bg-white">
         <h2 className="text-2xl font-semibold text-[#5D3D6A] text-center sm:text-left mb-6">My Orders</h2>
 
         {loading && <p>Loading your orders...</p>}
@@ -119,7 +117,7 @@ export default function UserOrder() {
           {!loading && !error && orders.length === 0 && <p className="text-gray-500">You have not placed any orders yet.</p>}
 
           {orders.map((order) => (
-            <div key={order.id} className="p-4 rounded-lg ">
+            <div key={order.id} className="p-4  shadow-sm">
               <div className="flex justify-between items-center mb-4 pb-2 border-b">
                 <div>
                   <p className="text-sm text-gray-500">Order ID: {order.id}</p>
@@ -127,24 +125,24 @@ export default function UserOrder() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-500">Total</p>
-                  {/* This line will now work correctly */}
                   <p className="font-bold text-lg">₹{order.total.toFixed(2)}</p>
                 </div>
               </div>
 
               {order.items.map((item, index) => (
                 <div key={index} className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-4 border-b last:border-b-0">
-                  <img src={`http://localhost:5000${item.imageUrl}`} alt={item.title} className="w-20 h-28 sm:w-24 sm:h-32 object-cover rounded" />
+                  {/* 2. DYNAMIC IMAGE URL: Use the base URL from the api object. */}
+                  <img src={`${api.defaults.baseURL}${item.imageUrl}`} alt={item.title} className="w-20 h-28 sm:w-24 sm:h-32 object-cover rounded" />
                   <div className="flex-1 flex flex-col sm:flex-row items-center justify-between w-full text-center sm:text-left">
                     <div>
                       <h3 className="text-lg font-semibold text-[#1F1E3E]">{item.title}</h3>
                       <p className="text-sm text-gray-500 mt-1">{item.author}</p>
                       <p className="text-sm text-gray-400 mt-2">Qty: {item.quantity}</p>
                       <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
-                        <button onClick={() => downloadInvoice(order)} className="bg-[#1F1E3E] text-white px-5 py-3 rounded-full text-sm">
+                        <button onClick={() => downloadInvoice(order)} className="bg-[#1F1E3E] text-white px-5 py-3 rounded-full text-sm hover:cursor-pointer">
                           Download Invoice
                         </button>
-                        <button className="border border-[#1F1E3E] text-[#1F1E3E] px-5 py-3 rounded-full text-sm">Track Order</button>
+                        <button className="border border-[#1F1E3E] text-[#1F1E3E] px-5 py-3 rounded-full text-sm hover:cursor-pointer">Track Order</button>
                       </div>
                     </div>
                     <div className="mt-4 sm:mt-0 text-left sm:text-right">

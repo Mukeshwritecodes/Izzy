@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 // 1. Import useAuth to get user token and status
 import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
 import { Routes, Route } from "react-router-dom";
-import axios from "axios";
+// 2. Import the new central 'api' instance
+import api from "./api/axios";
 
 // Layout Component
 import Navbar from "./Components/layout/Navbar";
@@ -15,55 +16,49 @@ import UserProfile from "./Pages/UserProfile";
 import UserOrder from "./Pages/UserOrder";
 import ProductPage from "./Pages/Product";
 import SearchResultsPage from "./Pages/SearchResult";
-import CheckoutPage from "./Pages/Checkout.jsx";
+import CheckoutPage from "./Pages/Checkout";
 
-// 2. Create an AppContent component to house the main logic
-// This is necessary to use the `useAuth` hook, which must be inside the AuthProvider.
+// This new AppContent component is necessary to use hooks from AuthContext
 function AppContent() {
   const [cartItems, setCartItems] = useState([]);
   const { user, token } = useAuth(); // Get user and token from context
 
-  // 3. This useEffect fetches the cart from the DB when the user logs in or the token changes
+  // This single function will now be our only source for fetching/refreshing the cart
+  const fetchCart = async () => {
+    if (!token) {
+      setCartItems([]);
+      return;
+    }
+    try {
+      // 3. Use the simplified 'api' object. The URL is relative and the token is added automatically.
+      const response = await api.get("/api/cart");
+      // Normalize backend data to the format your frontend components expect
+      const normalizedCart = response.data.map((item) => ({
+        id: item.BookID,
+        name: item.Title,
+        price: Number(item.Price),
+        quantity: item.Quantity,
+        imageUrl: `${api.defaults.baseURL}${item.BookImg}`, // Use the dynamic base URL
+      }));
+      setCartItems(normalizedCart);
+    } catch (error) {
+      console.error("Failed to fetch cart:", error);
+      setCartItems([]);
+    }
+  };
+
+  // Fetch the cart from the DB whenever the user's login status changes
   useEffect(() => {
-    const fetchCart = async () => {
-      // If there's no token, the user is logged out, so the cart should be empty.
-      if (!token) {
-        setCartItems([]);
-        return;
-      }
-      try {
-        const response = await axios.get("http://localhost:5000/api/cart", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        // Normalize backend data to the format your frontend components expect
-        const normalizedCart = response.data.map((item) => ({
-          id: item.BookID,
-          name: item.Title,
-          price: Number(item.Price),
-          quantity: item.Quantity,
-          imageUrl: `http://localhost:5000${item.BookImg}`,
-        }));
-        setCartItems(normalizedCart);
-      } catch (error) {
-        console.error("Failed to fetch cart:", error);
-        setCartItems([]); // Ensure cart is empty on a failed fetch
-      }
-    };
-
     fetchCart();
-  }, [user, token]); // This effect re-runs whenever the user logs in or out
+  }, [user, token]);
 
-  // 4. All cart handlers are now async and call the backend API
+  // 4. All cart handlers are now simplified to call the API and then refetch the cart
 
   const handleAddToCart = async (product) => {
     if (!token) return alert("Please log in to add items to your cart.");
     try {
-      // Call the backend to add the item
-      await axios.post("http://localhost:5000/api/cart", { bookId: product.BookID }, { headers: { Authorization: `Bearer ${token}` } });
-      // After adding, refetch the entire cart to ensure the UI is in sync
-      const response = await axios.get("http://localhost:5000/api/cart", { headers: { Authorization: `Bearer ${token}` } });
-      const normalizedCart = response.data.map((item) => ({ id: item.BookID, name: item.Title, price: Number(item.Price), quantity: item.Quantity, imageUrl: `http://localhost:5000${item.BookImg}` }));
-      setCartItems(normalizedCart);
+      await api.post("/api/cart", { bookId: product.BookID });
+      fetchCart(); // After adding, just call fetchCart to get the updated list
     } catch (error) {
       console.error("Failed to add to cart:", error);
     }
@@ -72,10 +67,8 @@ function AppContent() {
   const handleUpdateQuantity = async (id, newQuantity) => {
     if (!token) return;
     try {
-      await axios.put(`http://localhost:5000/api/cart/${id}`, { quantity: newQuantity }, { headers: { Authorization: `Bearer ${token}` } });
-      const response = await axios.get("http://localhost:5000/api/cart", { headers: { Authorization: `Bearer ${token}` } });
-      const normalizedCart = response.data.map((item) => ({ id: item.BookID, name: item.Title, price: Number(item.Price), quantity: item.Quantity, imageUrl: `http://localhost:5000${item.BookImg}` }));
-      setCartItems(normalizedCart);
+      await api.put(`/api/cart/${id}`, { quantity: newQuantity });
+      fetchCart(); // Refetch to update the UI
     } catch (error) {
       console.error("Failed to update quantity:", error);
     }
@@ -84,12 +77,8 @@ function AppContent() {
   const handleRemoveItem = async (id) => {
     if (!token) return;
     try {
-      await axios.delete(`http://localhost:5000/api/cart/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const response = await axios.get("http://localhost:5000/api/cart", { headers: { Authorization: `Bearer ${token}` } });
-      const normalizedCart = response.data.map((item) => ({ id: item.BookID, name: item.Title, price: Number(item.Price), quantity: item.Quantity, imageUrl: `http://localhost:5000${item.BookImg}` }));
-      setCartItems(normalizedCart);
+      await api.delete(`/api/cart/${id}`);
+      fetchCart(); // Refetch to update the UI
     } catch (error) {
       console.error("Failed to remove item:", error);
     }
@@ -108,7 +97,7 @@ function AppContent() {
           <Route path="/cart" element={<Cart cartItems={cartItems} onUpdateQuantity={handleUpdateQuantity} onRemoveItem={handleRemoveItem} />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/orders" element={<UserOrder />} />
-          <Route path="/checkout" element={<CheckoutPage cartItems={cartItems} />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="*" element={<div className="p-10 text-center">404 - Page Not Found</div>} />
         </Routes>
       </main>
@@ -117,7 +106,7 @@ function AppContent() {
   );
 }
 
-// 5. The main App component now simply wraps AppContent in the provider
+// The main App component now just wraps AppContent in the provider
 export default function App() {
   return (
     <AuthProvider>

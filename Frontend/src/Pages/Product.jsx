@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios";
 import BookCard from "../Components/BookCard"; // Assuming correct path from src
 
 export default function ProductPage({ onAddToCart }) {
@@ -17,7 +17,7 @@ export default function ProductPage({ onAddToCart }) {
       setLoading(true);
       setError("");
       try {
-        const response = await axios.get(`http://localhost:5000/api/books/${id}`);
+        const response = await api.get(`/api/books/${id}`);
         setBook(response.data.mainBook);
         setRelatedBooks(response.data.related);
       } catch (err) {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import api from "../api/axios"; // Corrected Path
+import { useAuth } from "../context/AuthContext"; // Corrected Path
 
 export default function CheckoutPage() {
-  const { user, token } = useAuth();
+  const { user, token } = useAuth(); // Token is still useful for checking login status
   const navigate = useNavigate();
 
   const [shippingAddress, setShippingAddress] = useState("");
@@ -33,10 +33,14 @@ export default function CheckoutPage() {
     setLoading(true);
     setError("");
     try {
-      await axios.post("http://localhost:5000/api/orders", { shippingAddress, paymentMethod }, { headers: { Authorization: `Bearer ${token}` } });
+      // The API call is now simplified. The 'headers' object is no longer needed
+      // because the axios interceptor in 'api/axios.js' adds the token automatically.
+      await api.post("/api/orders", { shippingAddress, paymentMethod });
+
       alert("Order placed successfully!");
-      // TODO: In the next step, you might want to clear the cart in the App state
-      navigate("/orders"); // Redirect to a "My Orders" page
+      // After placing the order, you'll likely want to refresh the cart state in App.jsx.
+      // For now, we just redirect.
+      navigate("/orders");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to place order.");
     } finally {

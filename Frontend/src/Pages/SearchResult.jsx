@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios"; // Using the centralized axios instance
 import SearchResultCard from "../Components/SearchResultCard"; // Path to the card component
 
 export default function SearchResultsPage() {
@@ -22,7 +22,7 @@ export default function SearchResultsPage() {
       setLoading(true);
       setError("");
       try {
-        const response = await axios.get(`http://localhost:5000/api/books/search?q=${query}`);
+        const response = await api.get(`/api/books/search?q=${query}`);
         setSearchResults(response.data);
       } catch (err) {
         setError("Failed to fetch search results. Please try again.");

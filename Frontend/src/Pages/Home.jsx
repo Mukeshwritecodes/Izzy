@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // 1. Import axios for API calls
+import api from "../api/axios"; // 1. Import axios for API calls
 import HeroSection from "../Components/HeroSection";
 import FeaturedGenre from "../Components/FeaturedGenre";
 import BookCard from "../Components/BookCard";
@@ -16,7 +16,7 @@ export default function Home({ onAddToCart }) {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/books");
+        const response = await api.get("/api/books");
         setBooks(response.data); // Store the fetched books in state
       } catch (err) {
         setError("Could not load books. Please try again later.");
