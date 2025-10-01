@@ -1,9 +1,9 @@
 import { useState } from "react";
-import DownArrow from "../../assets/icons/DownArrow.svg?react";
-import Instagram from "../../assets/icons/Instagram.svg?react";
-import Facebook from "../../assets/icons/Facebook.svg?react";
-import Twitter from "../../assets/icons/Twitter.svg?react";
-import Pinterest from "../../assets/icons/Pinterest.svg?react";
+import DownArrow from "../../Assets/Icons/DownArrow.svg?react";
+import Instagram from "../../Assets/Icons/Instagram.svg?react";
+import Facebook from "../../Assets/Icons/Facebook.svg?react";
+import Twitter from "../../Assets/Icons/Twitter.svg?react";
+import Pinterest from "../../Assets/Icons/Pinterest.svg?react";
 
 export default function Footer() {
   const [showLinks, setShowLinks] = useState(false);
