@@ -2,16 +2,13 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../config/db.js");
-// 1. Import the Twilio library
 const twilio = require("twilio");
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// 2. Initialize the Twilio client using your credentials from the .env file
 const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-// In-memory store for OTPs. In production, use a more persistent store like Redis.
 const otpStore = {};
 
 // == ENDPOINT 1: SEND OTP ==
@@ -21,18 +18,17 @@ router.post("/send-otp", async (req, res) => {
     return res.status(400).json({ message: "Phone number is required." });
   }
 
-  // Generate a 6-digit OTP
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  const expiry = Date.now() + 10 * 60 * 1000; // OTP expires in 10 minutes
-
+  const expiry = Date.now() + 10 * 60 * 1000;
   otpStore[phoneNo] = { otp, expiry };
 
-  // --- 3. UPDATED: Use Twilio to send the real SMS ---
   try {
+    // --- THIS CODE IS NOW ACTIVE ---
+    // Use the Twilio client to send the real SMS
     await twilioClient.messages.create({
       body: `Your verification code for Izzy Bookstore is: ${otp}`,
-      from: process.env.TWILIO_PHONE_NUMBER, // Your Twilio phone number
-      to: phoneNo, // The user's phone number
+      from: process.env.TWILIO_PHONE_NUMBER, // Your Twilio number
+      to: phoneNo, // The user's number
     });
 
     // Check if the user already exists to inform the frontend
@@ -41,7 +37,6 @@ router.post("/send-otp", async (req, res) => {
     res.status(200).json({ message: "OTP sent successfully.", userExists });
   } catch (error) {
     console.error("Error during OTP sending:", error);
-    // This can be a Twilio error or a database error
     res.status(500).json({ message: "Failed to send OTP. Please check the phone number." });
   }
 });
