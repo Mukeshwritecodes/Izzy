@@ -18,6 +18,8 @@ router.post("/send-otp", async (req, res) => {
     return res.status(400).json({ message: "Phone number is required." });
   }
 
+  const formattedPhoneNo = `+91${phoneNo}`;
+
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   const expiry = Date.now() + 10 * 60 * 1000;
   otpStore[phoneNo] = { otp, expiry };
