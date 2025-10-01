@@ -114,12 +114,12 @@ export default function UserProfile() {
   return (
     <div className="min-h-screen flex">
       {/* --- Left Sidebar --- */}
-      <aside className="w-32 sm:w-48 bg-[#E2C6DA] text-[#1F1E3E] flex flex-col justify-between p-6">
+      <aside className="w-32 sm:w-48 bg-[#E2C6DA] text-[#ffffff] flex flex-col justify-between p-6">
         <nav className="flex flex-col gap-6">
           <a href="/" className="hover:underline">
             Home
           </a>
-          <a href="/profile" className="font-bold text-[#1F1E3E]">
+          <a href="/profile" className="font-semibold underline text-[#ffffff]">
             My Profile
           </a>
           <a href="/orders" className="hover:underline">

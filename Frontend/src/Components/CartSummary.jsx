@@ -33,11 +33,6 @@ export default function CartSummary({ totals }) {
 
       {/* Grand Total Row */}
       <TotalRow label="Grand Total" value={grandTotal} isGrandTotal={true} />
-
-      {/* Checkout Button - Dark Navy Blue (#1F1E3E) and oval-shaped */}
-      <button className="mt-8 bg-[#1F1E3E] hover:bg-indigo-900 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 tracking-wider uppercase focus:outline-none focus:ring-4 focus:ring-indigo-300" onClick={() => console.log("Proceeding to Checkout...")}>
-        Check Out
-      </button>
     </div>
   );
 }
