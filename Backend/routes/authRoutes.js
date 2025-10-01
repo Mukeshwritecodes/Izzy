@@ -1,11 +1,15 @@
-// routes/authRoutes.js
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../config/db.js");
+// 1. Import the Twilio library
+const twilio = require("twilio");
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
+
+// 2. Initialize the Twilio client using your credentials from the .env file
+const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 // In-memory store for OTPs. In production, use a more persistent store like Redis.
 const otpStore = {};
@@ -23,19 +27,22 @@ router.post("/send-otp", async (req, res) => {
 
   otpStore[phoneNo] = { otp, expiry };
 
-  // --- OTP Sending Simulation ---
-  // In a real application, you would use an SMS service like Twilio here.
-  console.log(`✅ OTP for ${phoneNo} is: ${otp}. (Expires in 10 minutes)`);
-  // Example with Twilio:
-  // twilioClient.messages.create({ body: `Your OTP is ${otp}`, from: '+123456789', to: phoneNo });
-
+  // --- 3. UPDATED: Use Twilio to send the real SMS ---
   try {
+    await twilioClient.messages.create({
+      body: `Your verification code for Izzy Bookstore is: ${otp}`,
+      from: process.env.TWILIO_PHONE_NUMBER, // Your Twilio phone number
+      to: phoneNo, // The user's phone number
+    });
+
+    // Check if the user already exists to inform the frontend
     const [rows] = await db.execute("SELECT CID FROM Customer WHERE PhoneNo = ?", [phoneNo]);
     const userExists = rows.length > 0;
     res.status(200).json({ message: "OTP sent successfully.", userExists });
   } catch (error) {
-    console.error("Database error on send-otp:", error);
-    res.status(500).json({ message: "Internal server error." });
+    console.error("Error during OTP sending:", error);
+    // This can be a Twilio error or a database error
+    res.status(500).json({ message: "Failed to send OTP. Please check the phone number." });
   }
 });
 
@@ -55,20 +62,16 @@ router.post("/verify-otp", async (req, res) => {
     return res.status(400).json({ message: "Invalid OTP." });
   }
 
-  // OTP is correct, clear it from the store
   delete otpStore[phoneNo];
 
   try {
     const [rows] = await db.execute("SELECT * FROM Customer WHERE PhoneNo = ?", [phoneNo]);
 
     if (rows.length > 0) {
-      // --- USER EXISTS: LOGIN ---
       const user = rows[0];
       const token = jwt.sign({ userId: user.CID, name: user.Name }, JWT_SECRET, { expiresIn: "7d" });
-      res.status(200).json({ message: "Login successful.", token, user: { name: user.Name, email: user.Email } });
+      res.status(200).json({ message: "Login successful.", token, user: { Name: user.Name, Email: user.Email, Address: user.Address, PhoneNo: user.PhoneNo } });
     } else {
-      // --- USER DOES NOT EXIST: PROCEED TO REGISTER ---
-      // Create a temporary token that verifies the phone number for the next step
       const registrationToken = jwt.sign({ phoneNo }, JWT_SECRET, { expiresIn: "10m" });
       res.status(201).json({ message: "Phone number verified. Please complete your registration.", registrationToken });
     }
@@ -96,20 +99,14 @@ router.post("/register", async (req, res) => {
   const { phoneNo } = decodedToken;
 
   try {
-    // Hash the password before storing
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const [result] = await db.execute(
-      "INSERT INTO Customer (Name, Email, PhoneNo, Address, Password) VALUES (?, ?, ?, ?, ?)",
-      [name, email, phoneNo, "", hashedPassword] // Address is optional, empty for now
-    );
+    const [result] = await db.execute("INSERT INTO Customer (Name, Email, PhoneNo, Address, Password) VALUES (?, ?, ?, ?, ?)", [name, email, phoneNo, "", hashedPassword]);
 
     const newUserId = result.insertId;
     const token = jwt.sign({ userId: newUserId, name }, JWT_SECRET, { expiresIn: "7d" });
 
-    res.status(201).json({ message: "Registration successful!", token, user: { name, email } });
+    res.status(201).json({ message: "Registration successful!", token, user: { Name: name, Email: email, Address: "", PhoneNo: phoneNo } });
   } catch (error) {
-    // Handle potential duplicate email/phone errors
     if (error.code === "ER_DUP_ENTRY") {
       return res.status(409).json({ message: "An account with this email or phone number already exists." });
     }
