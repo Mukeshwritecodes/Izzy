@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 // Import your icons using correct relative paths
-import Profile from "../../assets/icons/Profile_wborder.svg?react";
-import Genres from "../../assets/icons/Genres.svg?react";
-import BestSellers from "../../assets/icons/BestSellers.svg?react";
-import NewArrivals from "../../assets/icons/New Arrivals.svg?react";
-import Blog from "../../assets/icons/Blog.svg?react";
-import Contact from "../../assets/icons/Contact.svg?react";
+import Profile from "../../Assets/Icons/Profile_wborder.svg?react";
+import Genres from "../../Assets/Icons/Genres.svg?react";
+import BestSellers from "../../Assets/Icons/BestSellers.svg?react";
+import NewArrivals from "../../Assets/Icons/New Arrivals.svg?react";
+import Blog from "../../Assets/Icons/Blog.svg?react";
+import Contact from "../../Assets/Icons/Contact.svg?react";
 
 export default function Sidebar({ onLoginClick }) {
   const { user, logout } = useAuth();
