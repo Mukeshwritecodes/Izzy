@@ -17,7 +17,7 @@ export default function BookCard({ book, onAddToCart }) {
       className="font-jura flex flex-col items-center p-3 sm:p-4 rounded-xl hover:shadow-2xl hover:shadow-[#DBBCDB] transition duration-300 w-full mx-auto flex-shrink-0 relative group"
     >
       {/* Book Image */}
-      <div className="w-full h-[124px] sm:h-[224px] overflow-hidden rounded-lg mb-3">
+      <div className="w-full h-[124px] sm:h-[180px] overflow-hidden rounded-lg mb-3">
         <img src={fullImageUrl} alt={Title} className="w-full h-full object-contain rounded-lg" />
       </div>
 
@@ -34,7 +34,7 @@ export default function BookCard({ book, onAddToCart }) {
 
       {/* Add to Cart Button */}
       <button
-        className="w-full py-2 px-4 text-white bg-[#F27C66] rounded-full text-sm sm:text-md font-bold hover:bg-opacity-90 transition duration-150 shadow-md hover:shadow-lg"
+        className="w-full py-2 px-4 text-[#F27C66] border-2 border-[#F27C66] rounded-full text-sm sm:text-md font-bold hover:bg-opacity-90 transition duration-150 shadow-md hover:shadow-lg"
         onClick={(e) => {
           // Prevent the click from navigating the page
           e.preventDefault();
