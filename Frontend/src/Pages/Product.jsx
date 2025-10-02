@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../api/axios";
-import BookCard from "../Components/BookCard"; // Assuming correct path from src
+import BookCard from "../Components/BookCard";
 
 export default function ProductPage({ onAddToCart }) {
-  // Get the 'id' from the URL (e.g., /product/1)
   const { id } = useParams();
-
   const [book, setBook] = useState(null);
   const [relatedBooks, setRelatedBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,25 +25,24 @@ export default function ProductPage({ onAddToCart }) {
         setLoading(false);
       }
     };
-
     fetchBookData();
-  }, [id]); // Re-fetch data if the book ID in the URL changes
+  }, [id]);
 
   if (loading) return <div className="text-center p-10">Loading...</div>;
   if (error) return <div className="text-center p-10 text-red-500">{error}</div>;
-  if (!book) return null; // Or a "not found" component
+  if (!book) return null;
 
-  // Placeholder for discount logic if needed
+  const fullImageUrl = `${api.defaults.baseURL}${book.BookImg}`;
   const discountedPrice = book.Price * 0.85;
 
   return (
     <div className="bg-white">
-      <div className="container mx-auto max-w-5xl px-4 py-8 ba">
+      <div className="container mx-auto max-w-5xl px-4 py-8">
         {/* --- Main Product Section --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          {/* Left Side: Book Image */}
-          <div className="flex justify-center p-4 rounded-4xl items-start border-3 border-purple-100">
-            <img src={`http://localhost:5000${book.BookImg}`} alt={book.Title} className="w-full max-w-[220px] h-auto object-contain rounded-lg shadow-lg drop" />
+          {/* Left Side: Book Image (with updated styling) */}
+          <div className="flex justify-center items-start p-4 rounded-3xl border-2 border-purple-100">
+            <img src={fullImageUrl} alt={book.Title} className="w-full max-w-[220px] h-auto object-contain rounded-lg drop-shadow-lg" />
           </div>
 
           {/* Right Side: Book Details */}
@@ -87,9 +84,7 @@ export default function ProductPage({ onAddToCart }) {
         {/* --- About Author Section --- */}
         <div className="mt-16 bg-purple-50 p-8 rounded-lg">
           <h2 className="text-2xl font-bold text-[#1F1E3E] mb-4">About Author</h2>
-          <p className="text-gray-700 leading-relaxed">
-            {/* This would ideally come from an 'AuthorBio' column in an 'Authors' table */}A brief biography of {book.Author}. Having seen people immersed in every kind of difficulty, this author puts together their thoughts and choice to help readers make their lives better and more meaningful. Through this book, they would like to tell the reader that it's okay to have problems and issues in life. Everyone has them.
-          </p>
+          <p className="text-gray-700 leading-relaxed">A brief biography of {book.Author}. Having seen people immersed in every kind of difficulty, this author puts together their thoughts and choice to help readers make their lives better and more meaningful. Through this book, they would like to tell the reader that it's okay to have problems and issues in life. Everyone has them.</p>
         </div>
       </div>
     </div>
