@@ -12,7 +12,7 @@ export default function Blog() {
       date: "January 15, 2025",
       readTime: "5 min read",
       category: "Writing Craft",
-      image: "/src/Assets/Images/Book1.png"
+      image: "../Assets/Images/Book1.png",
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ export default function Blog() {
       date: "January 12, 2025",
       readTime: "7 min read",
       category: "Genres",
-      image: "/src/Assets/Images/Fantasy.png"
+      image: "../Assets/Images/Fantasy.png",
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ export default function Blog() {
       date: "January 10, 2025",
       readTime: "6 min read",
       category: "Book Collecting",
-      image: "/src/Assets/Images/Book2.png"
+      image: "../Assets/Images/Book2.png",
     },
     {
       id: 4,
@@ -42,7 +42,7 @@ export default function Blog() {
       date: "January 8, 2025",
       readTime: "4 min read",
       category: "Design",
-      image: "/src/Assets/Images/Ikigai.png"
+      image: "../Assets/Images/Ikigai.png",
     },
     {
       id: 5,
@@ -52,7 +52,7 @@ export default function Blog() {
       date: "January 5, 2025",
       readTime: "5 min read",
       category: "Industry",
-      image: "/src/Assets/Images/ItEndsWithUs.png"
+      image: "../Assets/Images/ItEndsWithUs.png",
     },
     {
       id: 6,
@@ -62,8 +62,8 @@ export default function Blog() {
       date: "January 3, 2025",
       readTime: "8 min read",
       category: "Technology",
-      image: "/src/Assets/Images/VeiledInSmoke.png"
-    }
+      image: "../Assets/Images/VeiledInSmoke.png",
+    },
   ];
 
   const featuredPost = blogPosts[0];
@@ -73,12 +73,12 @@ export default function Blog() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-[#1F1E3E] to-[#B787B6] py-16 px-4 sm:px-6 lg:px-12">
-        <img src={Branch} alt="Decorative branch" className="absolute top-4 left-4 w-20 h-20 opacity-30 transform rotate-12" />
-        <img src={BranchR} alt="Decorative branch" className="absolute bottom-4 right-4 w-24 h-24 opacity-30 transform -rotate-12" />
-        
+        <img src={Branch} alt="Decorative branch" className="absolute top-0 left-0 w-20 h-20 opacity-30 " />
+        <img src={BranchR} alt="Decorative branch" className="absolute bottom-0 right-0 w-24 h-24 opacity-30 " />
+
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F8FBE6] mb-4" style={{ fontFamily: "Irish Grover, cursive" }}>
-            Literary Chronicles
+            Izzy
           </h1>
           <p className="text-xl sm:text-2xl text-[#F8FBE6] opacity-90 mb-8" style={{ fontFamily: "Playfair Display, serif" }}>
             "Where stories meet storytellers, and readers discover their next great adventure"
@@ -96,18 +96,14 @@ export default function Blog() {
             </h2>
             <div className="flex-1 ml-6 h-px bg-gradient-to-r from-[#B787B6] to-transparent"></div>
           </div>
-          
+
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="order-2 lg:order-1">
-              <div className="inline-block px-3 py-1 bg-[#F27C66] text-white text-sm font-semibold rounded-full mb-4">
-                {featuredPost.category}
-              </div>
+              <div className="inline-block px-3 py-1 bg-[#F27C66] text-white text-sm font-semibold rounded-full mb-4">{featuredPost.category}</div>
               <h3 className="text-3xl sm:text-4xl font-bold text-[#1F1E3E] mb-4" style={{ fontFamily: "Jura, sans-serif" }}>
                 {featuredPost.title}
               </h3>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                {featuredPost.excerpt}
-              </p>
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">{featuredPost.excerpt}</p>
               <div className="flex items-center text-sm text-gray-500 mb-6">
                 <span className="font-semibold text-[#B787B6]">{featuredPost.author}</span>
                 <span className="mx-2">"</span>
@@ -115,17 +111,11 @@ export default function Blog() {
                 <span className="mx-2">"</span>
                 <span>{featuredPost.readTime}</span>
               </div>
-              <button className="bg-[#B787B6] hover:bg-[#A076A5] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
-                Read Full Story
-              </button>
+              <button className="bg-[#B787B6] hover:bg-[#A076A5] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">Read Full Story</button>
             </div>
             <div className="order-1 lg:order-2">
               <div className="relative">
-                <img 
-                  src={featuredPost.image} 
-                  alt={featuredPost.title}
-                  className="w-full h-80 object-cover rounded-xl shadow-lg"
-                />
+                <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-80 object-cover rounded-xl shadow-lg" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
               </div>
             </div>
@@ -147,25 +137,17 @@ export default function Blog() {
             {otherPosts.map((post) => (
               <article key={post.id} className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
                 <div className="relative overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <img src={post.image} alt={post.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                   <div className="absolute top-4 left-4">
-                    <span className="inline-block px-3 py-1 bg-[#F27C66] text-white text-xs font-semibold rounded-full">
-                      {post.category}
-                    </span>
+                    <span className="inline-block px-3 py-1 bg-[#F27C66] text-white text-xs font-semibold rounded-full">{post.category}</span>
                   </div>
                 </div>
-                
+
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-[#1F1E3E] mb-3 line-clamp-2 group-hover:text-[#B787B6] transition-colors duration-200" style={{ fontFamily: "Jura, sans-serif" }}>
                     {post.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center text-xs text-gray-500">
                     <span className="font-semibold text-[#B787B6]">{post.author}</span>
                     <span className="mx-2">"</span>
@@ -186,25 +168,17 @@ export default function Blog() {
           <h2 className="text-3xl sm:text-4xl font-bold text-[#F8FBE6] mb-4" style={{ fontFamily: "Jura, sans-serif" }}>
             Stay Updated with Our Literary Journey
           </h2>
-          <p className="text-lg text-[#F8FBE6] opacity-90 mb-8">
-            Subscribe to our newsletter and never miss a story, review, or literary discovery.
-          </p>
+          <p className="text-lg text-[#F8FBE6] opacity-90 mb-8">Subscribe to our newsletter and never miss a story, review, or literary discovery.</p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input 
-              type="email" 
-              placeholder="Enter your email address"
-              className="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#F27C66]"
-            />
-            <button className="bg-[#F27C66] hover:bg-[#E06B55] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
-              Subscribe
-            </button>
+            <input type="email" placeholder="Enter your email address" className="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#F27C66]" />
+            <button className="bg-[#F27C66] hover:bg-[#E06B55] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">Subscribe</button>
           </div>
         </div>
       </section>
 
       {/* Quote Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-12 bg-white relative">
-        <img src={Branch} alt="Decorative branch" className="absolute top-8 right-8 w-32 h-32 opacity-20 transform rotate-45" />
+        <img src={Branch} alt="Decorative branch" className="absolute top-0 right-0 w-32 h-32 opacity-20" />
         <div className="max-w-4xl mx-auto text-center">
           <blockquote className="text-2xl sm:text-3xl lg:text-4xl text-[#1F1E3E] font-italic leading-relaxed" style={{ fontFamily: "Playfair Display, serif" }}>
             ]Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers.^
