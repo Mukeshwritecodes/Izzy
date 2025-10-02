@@ -17,6 +17,8 @@ import UserOrder from "./Pages/UserOrder";
 import ProductPage from "./Pages/Product";
 import SearchResultsPage from "./Pages/SearchResult";
 import CheckoutPage from "./Pages/Checkout";
+import BlogPage from "./Pages/Blog";
+import ContactPage from "./Pages/Contact";
 
 // This new AppContent component is necessary to use hooks from AuthContext
 function AppContent() {
@@ -98,6 +100,8 @@ function AppContent() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/orders" element={<UserOrder />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<div className="p-10 text-center">404 - Page Not Found</div>} />
         </Routes>
       </main>

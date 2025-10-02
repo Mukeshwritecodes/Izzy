@@ -181,9 +181,17 @@ export default function Navbar({ totalCartItems = 0 }) {
         <p className="text-[#F8FBE6]">|</p>
         <li className="text-[#F8FBE6] hover:underline cursor-pointer">New Arrivals</li>
         <p className="text-[#F8FBE6]">|</p>
-        <li className="text-[#F8FBE6] hover:underline cursor-pointer">Blog</li>
+        <li className="text-[#F8FBE6] hover:underline cursor-pointer">
+          <button onClick={() => navigate("/blog")} className="text-[#F8FBE6] hover:underline cursor-pointer">
+            Blog
+          </button>
+        </li>
         <p className="text-[#F8FBE6]">|</p>
-        <li className="text-[#F8FBE6] hover:underline cursor-pointer">Contact</li>
+        <li className="text-[#F8FBE6] hover:underline cursor-pointer">
+          <button onClick={() => navigate("/contact")} className="text-[#F8FBE6] hover:underline cursor-pointer">
+            Contact
+          </button>
+        </li>
       </ul>
 
       {/* Search bar for mobile */}

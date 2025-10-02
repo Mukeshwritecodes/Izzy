@@ -53,6 +53,11 @@ export default function Footer() {
                     Contact us
                   </a>
                 </li>
+                <li>
+                  <a href="/blog" className="hover:text-[#F27C66] transition-colors">
+                    Blog
+                  </a>
+                </li>
               </ul>
             </div>
 
