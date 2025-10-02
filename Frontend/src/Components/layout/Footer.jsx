@@ -49,12 +49,12 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/contact" className="hover:text-[#F27C66] transition-colors">
+                  <a href="/Contact" className="hover:text-[#F27C66] transition-colors">
                     Contact us
                   </a>
                 </li>
                 <li>
-                  <a href="/blog" className="hover:text-[#F27C66] transition-colors">
+                  <a href="/Blog" className="hover:text-[#F27C66] transition-colors">
                     Blog
                   </a>
                 </li>

@@ -1,6 +1,12 @@
 import React from "react";
 import Branch from "../Assets/Images/Branch.png";
 import BranchR from "../Assets/Images/BranchR.png";
+import Book1 from "../Assets/Images/Book1.png";
+import Fantasy from "../Assets/Images/Fantasy.png";
+import Book2 from "../Assets/Images/Book2.png";
+import Ikigai from "../Assets/Images/Ikigai.png";
+import ItEndsWithUs from "../Assets/Images/ItEndsWithUs.png";
+import VeiledInSmoke from "../Assets/Images/VeiledInSmoke.png";
 
 export default function Blog() {
   const blogPosts = [
@@ -12,7 +18,7 @@ export default function Blog() {
       date: "January 15, 2025",
       readTime: "5 min read",
       category: "Writing Craft",
-      image: "../Assets/Images/Book1.png",
+      image: Book1,
     },
     {
       id: 2,
@@ -22,7 +28,7 @@ export default function Blog() {
       date: "January 12, 2025",
       readTime: "7 min read",
       category: "Genres",
-      image: "../Assets/Images/Fantasy.png",
+      image: Fantasy,
     },
     {
       id: 3,
@@ -32,7 +38,7 @@ export default function Blog() {
       date: "January 10, 2025",
       readTime: "6 min read",
       category: "Book Collecting",
-      image: "../Assets/Images/Book2.png",
+      image: Book2,
     },
     {
       id: 4,
@@ -42,7 +48,7 @@ export default function Blog() {
       date: "January 8, 2025",
       readTime: "4 min read",
       category: "Design",
-      image: "../Assets/Images/Ikigai.png",
+      image: Ikigai,
     },
     {
       id: 5,
@@ -52,7 +58,7 @@ export default function Blog() {
       date: "January 5, 2025",
       readTime: "5 min read",
       category: "Industry",
-      image: "../Assets/Images/ItEndsWithUs.png",
+      image: ItEndsWithUs,
     },
     {
       id: 6,
@@ -62,7 +68,7 @@ export default function Blog() {
       date: "January 3, 2025",
       readTime: "8 min read",
       category: "Technology",
-      image: "../Assets/Images/VeiledInSmoke.png",
+      image: VeiledInSmoke,
     },
   ];
 
@@ -73,7 +79,7 @@ export default function Blog() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-[#1F1E3E] to-[#B787B6] py-16 px-4 sm:px-6 lg:px-12">
-        <img src={Branch} alt="Decorative branch" className="absolute top-0 left-0 w-20 h-20 opacity-30 " />
+        <img src={Branch} alt="Decorative branch" className="absolute top-0 left-0 w-20 h-20 opacity-30 rotate-90" />
         <img src={BranchR} alt="Decorative branch" className="absolute bottom-0 right-0 w-24 h-24 opacity-30 " />
 
         <div className="relative max-w-4xl mx-auto text-center">
@@ -163,27 +169,27 @@ export default function Blog() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 px-4 sm:px-6 lg:px-12 bg-gradient-to-r from-[#1F1E3E] to-[#B787B6]">
+      <section className="py-16 px-4 sm:px-6 lg:px-12 bg-gradient-to-r from-[#1F1E3E] to-[#B787B6] relative">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-[#F8FBE6] mb-4" style={{ fontFamily: "Jura, sans-serif" }}>
             Stay Updated with Our Literary Journey
           </h2>
           <p className="text-lg text-[#F8FBE6] opacity-90 mb-8">Subscribe to our newsletter and never miss a story, review, or literary discovery.</p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input type="email" placeholder="Enter your email address" className="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#F27C66]" />
+            <input type="email" placeholder="Enter your email address" className="flex-1 px-4 py-3 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#F27C66]" />
             <button className="bg-[#F27C66] hover:bg-[#E06B55] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">Subscribe</button>
           </div>
         </div>
+        <img src={Branch} alt="Decorative branch" className="absolute top-0 right-0 w-32 h-32 opacity-20 rotate-180" />
       </section>
 
       {/* Quote Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-12 bg-white relative">
-        <img src={Branch} alt="Decorative branch" className="absolute top-0 right-0 w-32 h-32 opacity-20" />
+      <section className="py-16 px-4 sm:px-6 lg:px-12 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <blockquote className="text-2xl sm:text-3xl lg:text-4xl text-[#1F1E3E] font-italic leading-relaxed" style={{ fontFamily: "Playfair Display, serif" }}>
-            ]Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers.^
+            "Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers."
           </blockquote>
-          <cite className="block mt-6 text-lg text-[#B787B6] font-semibold"> Charles W. Eliot</cite>
+          <cite className="block mt-6 text-lg text-[#B787B6] font-semibold">- Charles W. Eliot</cite>
         </div>
       </section>
     </div>
