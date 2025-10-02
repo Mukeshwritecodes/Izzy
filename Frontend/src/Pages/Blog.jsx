@@ -79,8 +79,8 @@ export default function Blog() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-[#1F1E3E] to-[#B787B6] py-16 px-4 sm:px-6 lg:px-12">
-        <img src={Branch} alt="Decorative branch" className="absolute top-0 left-0 w-20 h-20 opacity-30 rotate-90" />
-        <img src={BranchR} alt="Decorative branch" className="absolute bottom-0 right-0 w-24 h-24 opacity-30 " />
+        <img src={Branch} alt="Decorative branch" className="absolute top-0 left-0 w-20 h-20 opacity-50 rotate-90" />
+        <img src={BranchR} alt="Decorative branch" className="absolute bottom-0 right-0 w-24 h-24 opacity-50" />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F8FBE6] mb-4" style={{ fontFamily: "Irish Grover, cursive" }}>
@@ -180,7 +180,7 @@ export default function Blog() {
             <button className="bg-[#F27C66] hover:bg-[#E06B55] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">Subscribe</button>
           </div>
         </div>
-        <img src={Branch} alt="Decorative branch" className="absolute top-0 right-0 w-32 h-32 opacity-20 rotate-180" />
+        <img src={Branch} alt="Decorative branch" className="absolute top-0 right-0 w-32 h-32 opacity-50 rotate-180" />
       </section>
 
       {/* Quote Section */}

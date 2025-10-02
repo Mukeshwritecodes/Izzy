@@ -76,8 +76,8 @@ export default function Contact() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-[#1F1E3E] to-[#B787B6] py-16 px-4 sm:px-6 lg:px-12">
-        <img src={Branch} alt="Decorative branch" className="absolute top-0 left-0 w-20 h-20 opacity-30" />
-        <img src={BranchR} alt="Decorative branch" className="absolute bottom-0 right-0 w-24 h-24 opacity-30" />
+        <img src={Branch} alt="Decorative branch" className="absolute top-0 left-0 w-20 h-20 opacity-50 rotate-90" />
+        <img src={BranchR} alt="Decorative branch" className="absolute bottom-0 right-0 w-24 h-24 opacity-50" />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F8FBE6] mb-4" style={{ fontFamily: "Irish Grover, cursive" }}>
@@ -178,7 +178,7 @@ export default function Contact() {
 
               {/* Map Placeholder */}
               <div className="mt-8 h-64 bg-gradient-to-br from-[#B787B6] to-[#CCA1E5] rounded-xl flex items-center justify-center relative overflow-hidden">
-                <img src={Branch} alt="Decorative" className="absolute top-4 right-4 w-16 h-16 opacity-20" />
+                <img src={Branch} alt="Decorative" className="absolute top-0 right-0 w-16 h-16 opacity-60 rotate-180" />
                 <div className="text-center text-white">
                   <div className="text-4xl mb-2">📍</div>
                   <p className="text-lg font-semibold">Interactive Map Coming Soon</p>
@@ -213,7 +213,7 @@ export default function Contact() {
 
       {/* Call to Action */}
       <section className="py-16 px-4 sm:px-6 lg:px-12 bg-gradient-to-r from-[#1F1E3E] to-[#B787B6] relative">
-        <img src={BranchR} alt="Decorative branch" className="absolute top-8 right-8 w-32 h-32 opacity-20 transform -rotate-12" />
+        <img src={BranchR} alt="Decorative branch" className="absolute top-0 right-0 w-32 h-32 opacity-50 rotate-270" />
         <div className="relative max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-[#F8FBE6] mb-4" style={{ fontFamily: "Jura, sans-serif" }}>
             Join Our Literary Community

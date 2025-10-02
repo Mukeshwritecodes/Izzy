@@ -22,9 +22,9 @@ export default function BookCard({ book, onAddToCart }) {
       </div>
 
       {/* Book Info */}
-      <div className="w-full text-center mt-2">
-        <h3 className="text-[#1F1E3E] text-base sm:text-lg font-semibold truncate px-1">{Title}</h3>
-        <p className="text-gray-500 text-xs sm:text-sm mt-0.5 mb-2 truncate px-1">{Author}</p>
+      <div className="w-full text-center mt-2" style={{fontFamily: 'Jura, sans-serif'}}>
+        <h3 className="text-[#1F1E3E] text-base sm:text-lg font-bold truncate px-1">{Title}</h3>
+        <p className="text-[#B787B6] text-xs sm:text-sm mt-0.5 mb-2 truncate px-1">{Author}</p>
       </div>
 
       {/* Price */}
@@ -34,7 +34,7 @@ export default function BookCard({ book, onAddToCart }) {
 
       {/* Add to Cart Button */}
       <button
-        className="w-full py-2 px-4 text-[#F27C66] border-2 border-[#F27C66] rounded-full text-sm sm:text-md font-bold hover:bg-opacity-90 transition duration-150 shadow-md hover:shadow-lg"
+        className="w-full py-2 px-4 text-[#F27C66] border-2 border-[#F27C66] rounded-full text-sm sm:text-md font-bold hover:bg-opacity-90 transition duration-150"
         onClick={(e) => {
           // Prevent the click from navigating the page
           e.preventDefault();

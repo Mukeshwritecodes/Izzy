@@ -30,7 +30,7 @@ export default function HeroSection() {
           {/* CTA Button */}
           <div className="relative z-10">
             <button className="bg-[#1F1E3E] text-white px-8 py-2 sm:px-12 sm:py-4 rounded-full text-[10px] sm:text-[20px] font-serif font-medium hover:bg-[#2A2847] hover:cursor-pointer transition-all duration-300 border-[#1F1E3E] absolute translate-y-[-2px] sm:translate-y-[-12px] translate-x-[-2px] sm:translate-x-[-10px]">Explore Books</button>
-            <div className="border-1 border-[#1F1E3E]   w-32 h-8 sm:w-54 sm:h-14 transition-all  rounded-full "></div>
+            {/* <div className="border-1 border-[#1F1E3E]   w-32 h-8 sm:w-54 sm:h-14 transition-all  rounded-full "></div> */}
           </div>
         </div>
       </div>
