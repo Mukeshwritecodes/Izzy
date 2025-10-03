@@ -1,10 +1,4 @@
-desc Books;
-desc Category;
-desc Customer;
-desc CustomerOrderSummary;
-desc OrderDetails;
-desc orders;
-desc payment;
-desc review;
-
-
+use izzy_bookstore;
+update Books set BookImg = '/images/The Time Machine.jpg' where BookID = 1;
+select BookID, Title, BookImg from Books;
+ 

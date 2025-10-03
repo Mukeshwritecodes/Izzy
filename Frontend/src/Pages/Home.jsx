@@ -35,7 +35,7 @@ export default function Home({ onAddToCart }) {
       <FeaturedGenre />
 
       <section className="py-8 px-2 sm:px-6 lg:px-12">
-        <h2 className="text-[16px] sm:text-[24px] md:text-[32px] font-serif font-semibold text-[#1F1E3E] pb-4" style={{ fontFamily: "jura, sans-serif" }}>
+        <h2 className="text-[20px] sm:text-[24px] md:text-[32px] font-serif font-semibold text-[#1F1E3E] pb-4" style={{ fontFamily: "jura, sans-serif" }}>
           Editor's Picks
         </h2>
         <hr className="border-gray-300"></hr>

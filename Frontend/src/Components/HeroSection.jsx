@@ -11,7 +11,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className={`flex justify-between gap-4 pl-3 pr-4 sm:pl-10 py-4 sm:pr-12 sm:py-16 overflow-hidden relative transition-colors duration-700 ease-in-out ${isDay ? "bg-gradient-to-tr from-white to-pink-100" : "bg-gradient-to-tr from-white via-[#f8f1f8] to-[#d4a4d3]"}`}>
+    <section className={`flex justify-between gap-4 pl-3 pr-4 sm:pl-10 py-4 sm:pr-12 sm:py-16 overflow-hidden relative transition-colors duration-700 ease-in-out ${isDay ? "bg-gradient-to-tr from-white via-pink-50 to-pink-200" : "bg-gradient-to-tr from-white via-[#f8f1f8] to-[#d4a4d3]"}`}>
       <div className="flex items-center">
         {/* Left side - Text content */}
         <div className="flex flex-col gap-6 md:gap-12 py-4 z-10">
