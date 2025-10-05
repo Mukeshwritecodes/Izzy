@@ -85,7 +85,7 @@ export default function Navbar({ totalCartItems = 0 }) {
 
   return (
     // Main wrapper
-    <nav className="flex-col w-full gap-0 bg-[#1F1E3E]">
+    <nav className="flex-col w-full gap-0 bg-[#1F1E3E] ">
       <div ref={sidebarRef} className={`fixed top-0 left-[-1px] h-full z-50 transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         {/* --- 2. PASS THE FUNCTION AS A PROP TO THE SIDEBAR --- */}
         <Sidebar onLoginClick={handleLoginClick} />
